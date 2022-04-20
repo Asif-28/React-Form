@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import "./App.css";
 import React from 'react'
-import * as fs from 'fs';
+
 
 
 export default function Form() {
