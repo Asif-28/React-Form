@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import "./App.css";
-import React from 'react'
-
+import React from 'react';
+import * as fs from 'fs';
 
 
 export default function Form() {
@@ -70,11 +70,12 @@ export default function Form() {
       
       return errors;
     };
-      //  const fs = require ('fs');
-      // if(Object.keys(formErrors).length === 0 && isSubmit){
-
-      // fs.writeFile('./user.json', JSON.stringify(valuesInput, undefined, 2))
-      // }
+       //const fs = require ('fs');
+      if(Object.keys(formErrors).length === 0 && isSubmit){
+      const  jsonString=JSON.stringify(valuesInput,undefined,2);
+      console.log(jsonString);
+      fs.writeFile('./user.json',jsonString)
+      }
   
 
      
