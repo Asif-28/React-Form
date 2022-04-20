@@ -5,7 +5,7 @@ body {
 }
 
 .container {
-  display: flex !important;
+  display: flex ;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -62,7 +62,9 @@ label{
   color: #2c3338;
   margin-right: 6px;
 }
-
+.navbar{
+  z-index: 99;
+}
 .navbar ul li{
    display: inline-block;
    padding: 18px 0;

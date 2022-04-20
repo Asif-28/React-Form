@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import "./App.css";
 import React from 'react'
+import * as fs from 'fs';
+
 
 export default function Form() {
     const initialValues = { username: "",phoneno:"" ,email: "", password: "", confirmpassword:"" };
@@ -22,15 +24,20 @@ export default function Form() {
     useEffect(() => {
       console.log(formErrors);
       if (Object.keys(formErrors).length === 0 && isSubmit) {
-        console.log(valuesInput);
+        //console.log(valuesInput);
       }
     }, [formErrors]);
     const validate = (values) => {
       const errors = {};
       const regexemail = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
-      // const regexpass =/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
+      const regexpass =/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{5,15}$/;
+      const wordcount =(values.username).trim().split(/\s+/).length;
+      console.log(wordcount);
       if (!values.username) {
         errors.username = "Username is required!";
+      }
+      if( wordcount>4){
+        errors.username="Enter within 4 words"
       }
        if(!values.phoneno){
         errors.phoneno="Phone No is Required!";
@@ -56,24 +63,24 @@ export default function Form() {
       } else if (values.password.length > 14) {
         errors.password = "Password cannot exceed more than 10 characters";
       } 
+      else  if(!regexpass.test(values.password)){
+        errors.password="Enter the corrrect Form";
+      }
+      
       
       return errors;
     };
+      //  const fs = require ('fs');
+      // if(Object.keys(formErrors).length === 0 && isSubmit){
 
+      // fs.writeFile('./user.json', JSON.stringify(valuesInput, undefined, 2))
+      // }
   
+
+     
     return (
       
       <div className="container">
-  
-       
-         {/* {Object.keys(formErrors).length === 0 && isSubmit ? (
-          <div className="ui message success">Signed in successfully</div>
-        ) : (
-          <pre>{JSON.stringify(formValues, undefined, 2)}</pre>
-        )}  */}
-
-
-  
         <form onSubmit={submitForm}>
           <h1>Input Form</h1>
           <div className=" divider"></div>
